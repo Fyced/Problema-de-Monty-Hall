@@ -1,5 +1,5 @@
-var h= 60;
-var w = 80;
+var h= 100;
+var w = 120;
 
 var puerta = [];
 var numeroPuertaPremio = Math.floor(Math.random()*36);
