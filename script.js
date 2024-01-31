@@ -1,3 +1,6 @@
+var h= 60;
+var w = 80;
+
 var puerta = [];
 var numeroPuertaPremio = Math.floor(Math.random()*36);
 var ejecutarOnclick = true;
@@ -5,8 +8,8 @@ var botonCambiable = 0;
 var botonSeleccionado = 0;
 
 var botonReiniciar = document.createElement("button");
-botonReiniciar.style.height=40;
-botonReiniciar.style.width=60;
+botonReiniciar.style.height=h;
+botonReiniciar.style.width=w;
 botonReiniciar.textContent="Reiniciar";
 
 botonReiniciar.onclick = function(){
@@ -14,8 +17,8 @@ location.reload();
 }
 
 var botonDesvelar = document.createElement("button");
-botonDesvelar.style.height=40;
-botonDesvelar.style.width=60;
+botonDesvelar.style.height=h;
+botonDesvelar.style.width=w;
 botonDesvelar.textContent="Desvelar";
 
 botonDesvelar.onclick = function(){
@@ -23,8 +26,8 @@ desvelarPuertas();
 }
 
 var botonCambiar = document.createElement("button");
-botonCambiar.style.height=40;
-botonCambiar.style.width=60;
+botonCambiar.style.height=h;
+botonCambiar.style.width=w;
 botonCambiar.textContent="Cambiar";
 
 botonCambiar.onclick = function(){
@@ -36,8 +39,8 @@ comprobarResultado();
 }
 
 var botonNoCambiar = document.createElement("button");
-botonNoCambiar.style.height=40;
-botonNoCambiar.style.width=60;
+botonNoCambiar.style.height=h;
+botonNoCambiar.style.width=w;
 botonNoCambiar.textContent="No Cambiar";
 
 botonNoCambiar.onclick = function(){
