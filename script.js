@@ -1,6 +1,8 @@
 var h= 100;
 var w = 120;
 
+var titulo = document.createElement("h1");
+
 var puerta = [];
 var numeroPuertaPremio = Math.floor(Math.random()*36);
 var ejecutarOnclick = true;
@@ -127,6 +129,12 @@ puerta[i].button.style.background = "url('p2s.jpeg')";
 } else{
 puerta[i].button.style.background = "url('p2w.jpeg')";
 }
+
+if(puerta[i].premio==true && puerta[i].seleccionado==true){
+titulo.textContent="Has Ganado";
+titulo.style.textDecoration = "underline";
+titulo.style.color = "red";
+}
 }
 
 document.body.removeChild(botonCambiar);
@@ -135,5 +143,7 @@ document.body.appendChild(botonReiniciar);
 }
 
 function inicializar(){
+titulo.textContent= "Problema de Monty Hall";
+document.body.appendChild(titulo);
 crearPuertas(36);
 }
