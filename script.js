@@ -18,25 +18,19 @@ botonReiniciar.onclick = function(){
 location.reload();
 }
 
+var desvelarFinal = false;
 var botonDesvelar = document.createElement("button");
 botonDesvelar.style.height=h;
 botonDesvelar.style.width=w;
 botonDesvelar.textContent="Desvelar";
 
 botonDesvelar.onclick = function(){
+if(desvelarFinal==false){
 desvelarPuertas();
 }
 
-var botonCambiar = document.createElement("button");
-botonCambiar.style.height=h;
-botonCambiar.style.width=w;
-botonCambiar.textContent="Cambiar";
-
-botonCambiar.onclick = function(){
-if(ejecutarOnclick == false){
-puerta[botonCambiable].seleccionado=true;
-puerta[botonSeleccionado].seleccionado=false;
-comprobarResultado();
+if(desvelarFinal==true){
+comprobarResultado()
 }
 }
 
@@ -47,7 +41,9 @@ botonNoCambiar.textContent="No Cambiar";
 
 botonNoCambiar.onclick = function(){
 if(ejecutarOnclick == false){
-comprobarResultado();
+document.body.appendChild(botonDesvelar);
+desvelarFinal=true;
+document.body.removeChild(botonNoCambiar);
 }
 }
 
@@ -66,10 +62,14 @@ this.button.style.backgroundSize = "cover";
 document.body.appendChild(this.button);
 
 this.button.onclick = function(){
-if(self.desvelado==false && ejecutaron click==false){
+if(self.desvelado==false && ejecutarOnclick==false && self.seleccionado==false){
+comprobacion();
 puerta[botonCambiable].seleccionado=true;
 puerta[botonSeleccionado].seleccionado=false;
-comprobarResultado();
+self.button.style.background = "url('p1.jpeg')";
+desvelarFinal=true;
+document.body.appendChild(botonDesvelar);
+document.body.removeChild(botonNoCambiar);
 }
 
 if(ejecutarOnclick==true && !self.seleccionado){
@@ -98,7 +98,6 @@ function desvelarPuertas(){
 ejecutarOnclick = false;
 
 document.body.removeChild(botonDesvelar);
-document.body.appendChild(botonCambiar);
 document.body.appendChild(botonNoCambiar);
 
 for(var i = 0; i<=puerta.length-1;i++){
@@ -145,7 +144,6 @@ titulo.style.color = "red";
 }
 }
 
-document.body.removeChild(botonCambiar);
 document.body.removeChild(botonNoCambiar);
 document.body.appendChild(botonReiniciar);
 }
