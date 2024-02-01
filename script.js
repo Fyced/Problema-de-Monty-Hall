@@ -1,11 +1,3 @@
-var h= 60;
-var w = 80;
-
-var partidas = 0;
-var ganadas = 0;
-var input = document.createElement("input");
-input.type = "number";
-
 var titulo = document.createElement("h1");
 
 var puerta = [];
@@ -14,6 +6,7 @@ var numeroPuertaPremio = 0
 var ejecutarOnclick = true;
 var botonCambiable = 0;
 var botonSeleccionado = 0;
+var desvelarFinal = false;
 
 var botonReiniciar = document.createElement("button");
 botonReiniciar.style.height=h;
@@ -21,10 +14,27 @@ botonReiniciar.style.width=w;
 botonReiniciar.textContent="Reiniciar";
 
 botonReiniciar.onclick = function(){
-location.reload();
+for(var i = 0; i<=puerta.length - 1; i++){
+if(puerta[i]){
+puerta[i].eliminar();
+}
 }
 
-var desvelarFinal = false;
+titulo.style.color = "black";
+titulo.textContent= "Problema de Monty Hall " + ganadas + "/" + partidas;
+desvelarFinal = false;
+puerta = [];
+console.log(puerta.length);
+numeroPuertaPremio = 0
+ejecutarOnclick = true;
+botonCambiable = 0;
+botonSeleccionado = 0;
+document.body.removeChild(botonReiniciar);
+crearPuertas(numeroPuertas);
+
+
+}
+
 var botonDesvelar = document.createElement("button");
 botonDesvelar.style.height=h;
 botonDesvelar.style.width=w;
@@ -87,7 +97,7 @@ document.body.appendChild(botonDesvelar);
 }
 }
 
-function eliminar(){
+this.eliminar = function(){
 document.body.removeChild(self.button);
 }
 
@@ -116,8 +126,16 @@ document.body.appendChild(botonNoCambiar);
 
 for(var i = 0; i<=puerta.length-1;i++){
 if(puerta[i].seleccionado==true && puerta[i].premio==true){
-puerta[Math.floor(Math.random()*36)].x=true;
+var j = Math.floor(Math.random()*(numeroPuertas-1)+1);
+if(j!=i){
+puerta[j].x=true;
+} else {
+while(j==i){
+j = Math.floor(Math.random()*(numeroPuertas-1)+1);
 }
+}
+}
+
 }
 
 for(var i = 0; i<=puerta.length-1;i++){
@@ -135,7 +153,9 @@ botonSeleccionado=i;
 
 function comprobacion(){
 for(var i=0;i<=puerta.length-1;i++){
+console.log("comprobado1");
 if(puerta[i].seleccionado==true){
+console.log("comprobado2");
 puerta[i].seleccionado=false;
 puerta[i].button.style.background = "url('p1s.jpeg')";
 }
