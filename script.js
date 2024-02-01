@@ -1,5 +1,5 @@
-var h= 100;
-var w = 120;
+var h= 60;
+var w = 80;
 
 var titulo = document.createElement("h1");
 
@@ -56,6 +56,7 @@ var self = this;
 this.seleccionado = false;
 this.premio = azar;
 this.x = false;
+this.desvelado = false;
 
 this.button = document.createElement("button");
 this.button.id= "boton" + numero;
@@ -65,6 +66,12 @@ this.button.style.backgroundSize = "cover";
 document.body.appendChild(this.button);
 
 this.button.onclick = function(){
+if(self.desvelado==false && ejecutaron click==false){
+puerta[botonCambiable].seleccionado=true;
+puerta[botonSeleccionado].seleccionado=false;
+comprobarResultado();
+}
+
 if(ejecutarOnclick==true && !self.seleccionado){
 comprobacion();
 self.seleccionado = true;
@@ -103,6 +110,7 @@ puerta[Math.floor(Math.random()*36)].x=true;
 for(var i = 0; i<=puerta.length-1;i++){
 if(puerta[i].premio==false && puerta[i].seleccionado==false && puerta[i].x==false){
 puerta[i].button.style.background = "url('p2s.jpeg')";
+puerta[i].desvelado=true;
 } else if (puerta[i].seleccionado==false){
 botonCambiable=i;
 } else if(puerta[i].seleccionado==true){
