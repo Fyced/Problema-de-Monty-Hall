@@ -1,3 +1,10 @@
+var h= 60;
+var w = 80;
+
+var partidas = 0;
+var ganadas = 0;
+var input = document.createElement("input");
+input.type = "number";
 var titulo = document.createElement("h1");
 
 var puerta = [];
