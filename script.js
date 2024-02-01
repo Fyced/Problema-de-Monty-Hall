@@ -1,10 +1,16 @@
 var h= 60;
 var w = 80;
 
+var partidas = 0;
+var ganadas = 0;
+var input = document.createElement("input");
+input.type = "number";
+
 var titulo = document.createElement("h1");
 
 var puerta = [];
-var numeroPuertaPremio = Math.floor(Math.random()*36);
+var numeroPuertas = 0;
+var numeroPuertaPremio = 0
 var ejecutarOnclick = true;
 var botonCambiable = 0;
 var botonSeleccionado = 0;
@@ -59,13 +65,14 @@ this.button.id= "boton" + numero;
 
 this.button.style.background = "url('p1s.jpeg')";
 this.button.style.backgroundSize = "cover";
+this.button.style.height = 200;
+this.button.style.width = 100;
 document.body.appendChild(this.button);
 
 this.button.onclick = function(){
 if(self.desvelado==false && ejecutarOnclick==false && self.seleccionado==false){
 comprobacion();
-puerta[botonCambiable].seleccionado=true;
-puerta[botonSeleccionado].seleccionado=false;
+self.seleccionado=true;
 self.button.style.background = "url('p1.jpeg')";
 desvelarFinal=true;
 document.body.appendChild(botonDesvelar);
@@ -80,9 +87,16 @@ document.body.appendChild(botonDesvelar);
 }
 }
 
+function eliminar(){
+document.body.removeChild(self.button);
+}
+
 }
 
 function crearPuertas(total){
+partidas++;
+numeroPuertaPremio = Math.floor(Math.random()*numeroPuertas+1);
+console.log(numeroPuertaPremio);
 for(var y=1;y<=total;y++){
 if(y == numeroPuertaPremio){
 puerta.push(new objeto(y,true))
@@ -138,18 +152,36 @@ puerta[i].button.style.background = "url('p2w.jpeg')";
 }
 
 if(puerta[i].premio==true && puerta[i].seleccionado==true){
-titulo.textContent="Has Ganado";
+ganadas++;
+titulo.textContent="Has Ganado " + ganadas + "/" + partidas;
 titulo.style.textDecoration = "underline";
 titulo.style.color = "red";
 }
 }
 
-document.body.removeChild(botonNoCambiar);
+document.body.removeChild(botonDesvelar);
 document.body.appendChild(botonReiniciar);
 }
 
 function inicializar(){
-titulo.textContent= "Problema de Monty Hall";
+titulo.textContent= "Problema de Monty Hall " + ganadas + "/" + partidas;
+
+var formulario = document.createElement("form");
+var botonSubmit = document.createElement("button");
+botonSubmit.type = "submit";
+botonSubmit.textContent = "Enviar";
+formulario.appendChild(botonSubmit);
+
 document.body.appendChild(titulo);
-crearPuertas(36);
+document.body.appendChild(input);
+document.body.appendChild(formulario);
+formulario.appendChild(input);
+
+
+formulario.addEventListener("submit",function(event){
+event.preventDefault();
+numeroPuertas = parseInt(input.value,10);
+crearPuertas(numeroPuertas);
+document.body.removeChild(formulario);
+});
 }
